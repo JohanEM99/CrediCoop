@@ -9,7 +9,8 @@ Permite gestionar la información de los socios, configurar productos crediticio
 
 ### 1.1 Diagrama de Casos de Uso
 
-### 1.2 Diagrama de clases
+### 1.2 Diagrama de Clases
+        https://drive.google.com/file/d/1NvnhGckNEagNhdCmNJ7wDnoELmhDMAaD/view?usp=sharing
 
 ### 1.3 Diagrama de flujo de datos
 
