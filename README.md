@@ -17,6 +17,7 @@ https://drive.google.com/file/d/1NvnhGckNEagNhdCmNJ7wDnoELmhDMAaD/view?usp=shari
 ### 1.3 Diagrama de flujo de datos
 
 ### 1.4 Diagrama Entidad Relación
+https://drive.google.com/file/d/1fc-N8U88IfSIs19c8NHD1_4SQ5oSJ0_q/view?usp=sharing
 
 ### 1.5 Modelo Relacional y Modelo Físico
 
