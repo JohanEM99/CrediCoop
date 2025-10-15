@@ -11,7 +11,8 @@ Permite gestionar la información de los socios, configurar productos crediticio
 
 ### 1.2 Diagrama de Clases
 https://drive.google.com/drive/folders/1yD5lLmL7qiMCERf2AU0IXOkr0gNNuxh4?usp=sharing
-
+### 1.3 Diagrama Modelo Fisico
+https://drive.google.com/drive/folders/1j7whdqI_WhJUu9wX3MWXZabc5xGMR9J0?usp=sharing
 ### 1.4 Diagrama Entidad Relación
 https://drive.google.com/drive/folders/1ijCFNqMe4o_WUDlMPh46AVUGNAljD-nz?usp=sharing
 
