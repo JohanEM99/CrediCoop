@@ -1,7 +1,5 @@
 # CrediCoop
 
-# 🏦 Sistema de Gestión de Préstamos Cooperativos
-
 ## Introducción
 El **Sistema de Gestión de Préstamos Cooperativos** es una plataforma diseñada para administrar de forma integral las operaciones financieras de una cooperativa.  
 Permite gestionar la información de los socios, configurar productos crediticios, procesar solicitudes y aprobaciones, registrar desembolsos y pagos, controlar la morosidad y generar reportes financieros.
