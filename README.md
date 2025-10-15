@@ -23,7 +23,7 @@ https://drive.google.com/file/d/1fc-N8U88IfSIs19c8NHD1_4SQ5oSJ0_q/view?usp=shari
 
 
 ## Autores
- -Andres Felipe Mesa – Analista y desarrollador del proyecto
+ -Andres Felipe Mesa
  -Diego Jose Betancour
  -Wilson Muñoz
  -Benjamin Rizo
