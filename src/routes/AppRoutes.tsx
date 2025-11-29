@@ -3,6 +3,7 @@ import Login from '../pages/Login';
 import AdminDashboard from '../pages/admin/Dashboard';
 import NuevoSocio from '../pages/admin/NuevoSocio';
 import MisPrestamos from '../pages/socio/MisPrestamos';
+import SolicitarPrestamo from '../pages/socio/SolicitarPrestamo';
 
 function App() {
   return (
@@ -10,9 +11,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
+        
+        {/* Rutas de Admin */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/socios/nuevo" element={<NuevoSocio />} />
-        <Route path="/socio/prestamos" element={<MisPrestamos />} />
+        
+        {/* Rutas de Socio */}
+        <Route path="/socio/mis-prestamos" element={<MisPrestamos />} />
+        <Route path="/socio/solicitar-prestamo" element={<SolicitarPrestamo />} />
+        
+        {/* Ruta fallback */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>

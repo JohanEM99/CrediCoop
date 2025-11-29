@@ -90,7 +90,8 @@ const Login = () => {
         localStorage.setItem('user', JSON.stringify({
           email: 'admin@credicoop.com',
           nombre: 'Carlos Administrador',
-          rol: 'ADMIN'
+          rol: 'ADMIN',
+          id: 'admin-1'
         }));
         
         // Redirigir a dashboard admin
@@ -100,10 +101,12 @@ const Login = () => {
         localStorage.setItem('user', JSON.stringify({
           email: 'socio@credicoop.com',
           nombre: 'Juan Pérez',
-          rol: 'SOCIO'
+          rol: 'SOCIO',
+          id: 'socio-1'
         }));
         
-        navigate('/socio/prestamos');
+        
+        navigate('/socio/mis-prestamos');
       } 
       else {
         throw new Error('Credenciales incorrectas');
