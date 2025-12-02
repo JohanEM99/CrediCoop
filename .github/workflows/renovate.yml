@@ -19,3 +19,19 @@ jobs:
           renovate-version: full
         env:
           RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Mostrar estado de actualizaciones
+        run: |
+          echo "----------------------------------------"
+          echo "Revisando si hubo actualizaciones..."
+          echo "----------------------------------------"
+
+          if grep -qi '"prOpened": true' renovate.log.json; then
+            echo "Renovate abrió nuevas Pull Requests con actualizaciones."
+          else
+            echo "No había actualizaciones disponibles para aplicar."
+          fi
+          
+          echo "----------------------------------------"
+          echo "Proceso completado."
+          echo "----------------------------------------"
