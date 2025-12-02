@@ -1,0 +1,7 @@
+{
+  "extends": ["config:recommended"],
+  "automerge": false,
+  "prHourlyLimit": 2,
+  "labels": ["dependencies"],
+  "rangeStrategy": "bump"
+}
