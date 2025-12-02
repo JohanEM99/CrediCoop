@@ -20,7 +20,7 @@ jobs:
         env:
           RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-- name: Mostrar estado de actualizaciones
+      - name: Mostrar estado de actualizaciones
         run: |
           echo "----------------------------------------"
           echo "Revisando si hubo actualizaciones..."
