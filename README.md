@@ -13,6 +13,7 @@ https://drive.google.com/drive/folders/1Kz691bquaJRFQPzRnKGkdfZoOyFZ9pPt?usp=sha
 https://drive.google.com/drive/folders/1yD5lLmL7qiMCERf2AU0IXOkr0gNNuxh4?usp=sharing
 ### 1.3 Diagrama Modelo Fisico
 https://drive.google.com/drive/folders/1j7whdqI_WhJUu9wX3MWXZabc5xGMR9J0?usp=sharing
+https://drive.google.com/drive/folders/1j7whdqI_WhJUu9wX3MWXZabc5xGMR9J0?usp=drive_link
 ### 1.4 Diagrama Entidad Relación
 https://drive.google.com/drive/folders/1ijCFNqMe4o_WUDlMPh46AVUGNAljD-nz?usp=sharing
 
