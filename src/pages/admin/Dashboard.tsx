@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Users, DollarSign, FileText, UserPlus, ListChecks, Receipt } from 'lucide-react';
+import { LogOut, Users, DollarSign, FileText, UserPlus, ListChecks } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 const AdminDashboard = () => {

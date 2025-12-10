@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Search, Edit, Trash2, UserPlus, Eye, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Search, Edit, Trash2, UserPlus, AlertCircle } from 'lucide-react';
 import { obtenerSocios, buscarSocios, eliminarSocio } from '../../services/sociosService';
 
 interface Socio {
