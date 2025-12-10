@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../pages/Login';
 import AdminDashboard from '../pages/admin/Dashboard';
 import NuevoSocio from '../pages/admin/NuevoSocio';
+import ListaUsuarios from '../pages/admin/ListaUsuarios';
 import MisPrestamos from '../pages/socio/MisPrestamos';
 import SolicitarPrestamo from '../pages/socio/SolicitarPrestamo';
 
@@ -15,6 +16,7 @@ function App() {
         {/* Rutas de Admin */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/socios/nuevo" element={<NuevoSocio />} />
+        <Route path="/admin/usuarios" element={<ListaUsuarios />} />
         
         {/* Rutas de Socio */}
         <Route path="/socio/mis-prestamos" element={<MisPrestamos />} />
