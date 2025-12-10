@@ -25,7 +25,7 @@ export interface Socio {
   direccion: string
   fecha_nacimiento: string
   ocupacion?: string
-  estado: 'ACTIVO' | 'INACTIVO' | 'SUSPENDIDO'
+  estado: 'ACTIVO' | 'INACTIVO'
   created_at?: string
   updated_at?: string
 }
@@ -143,6 +143,30 @@ export const crearSocio = async (data: CrearSocioData): Promise<SocioResponse> =
   }
 }
 
+
+export const eliminarSocio = async (id: string) => {
+  try {
+    const { error } = await supabase
+      .from('socios')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      return {
+        success: false,
+        error: error.message
+      };
+    }
+
+    return { success: true };
+  } catch (err) {
+    return {
+      success: false,
+      error: 'Error al eliminar socio'
+    };
+  }
+};
+
 /**
  * Obtener todos los socios
  */
@@ -228,7 +252,7 @@ export const actualizarSocio = async (id: string, data: Partial<CrearSocioData>)
  */
 export const cambiarEstadoSocio = async (
   id: string, 
-  estado: 'ACTIVO' | 'INACTIVO' | 'SUSPENDIDO'
+  estado: 'ACTIVO' | 'INACTIVO'
 ): Promise<SocioResponse> => {
   try {
     const { data, error } = await supabase
