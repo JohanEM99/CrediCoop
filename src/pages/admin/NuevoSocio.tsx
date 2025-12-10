@@ -1,27 +1,23 @@
 import { useState, type FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Save, User, Mail, Phone, MapPin, CreditCard, Calendar } from 'lucide-react';
+import { ArrowLeft, Save, User, Mail, Phone, MapPin, CreditCard, Calendar, Briefcase, CheckCircle } from 'lucide-react';
+import { crearSocio } from '../../services/sociosService';
 
 const NuevoSocio = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-  const userStr = localStorage.getItem('user');
-  console.log('Usuario en localStorage:', userStr); // Para debug
-  
-  if (!userStr) {
-    console.log('No hay usuario, redirigiendo...');
-    navigate('/login', { replace: true });
-  } else {
-    const user = JSON.parse(userStr);
-    console.log('Usuario encontrado:', user);
+    const userStr = localStorage.getItem('user');
+    if (!userStr) {
+      navigate('/login', { replace: true });
+      return;
+    }
     
+    const user = JSON.parse(userStr);
     if (user.rol !== 'ADMIN') {
-      console.log('No es admin, redirigiendo...');
       navigate('/login', { replace: true });
     }
-  }
-}, [navigate]);
+  }, [navigate]);
   
   // Estados del formulario
   const [formData, setFormData] = useState({
@@ -37,6 +33,7 @@ const NuevoSocio = () => {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   // Manejar cambios en inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -82,22 +79,64 @@ const NuevoSocio = () => {
     try {
       setIsLoading(true);
 
-      // Simular guardado
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await crearSocio({
+        cedula: formData.cedula,
+        nombre: formData.nombre,
+        apellido: formData.apellido,
+        email: formData.email,
+        telefono: formData.telefono,
+        direccion: formData.direccion,
+        fecha_nacimiento: formData.fechaNacimiento,
+        ocupacion: formData.ocupacion || undefined
+      });
 
-      // Aquí iría la llamada a tu API
-      console.log('Datos del socio:', formData);
+      if (!response.success) {
+        alert(response.error || 'Error al crear el socio');
+        return;
+      }
 
-      // Redirigir al dashboard
-      alert('¡Socio creado exitosamente!');
-      navigate('/admin/dashboard');
+      // Mostrar mensaje de éxito
+      setShowSuccess(true);
+
+      // Esperar 2 segundos y redirigir
+      setTimeout(() => {
+        navigate('/admin/dashboard');
+      }, 2000);
 
     } catch (error) {
+      console.error('Error:', error);
       alert('Error al crear el socio');
     } finally {
       setIsLoading(false);
     }
   };
+
+  // Modal de éxito
+  if (showSuccess) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle className="w-10 h-10 text-green-600" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">¡Socio Creado!</h2>
+          <p className="text-gray-600 mb-2">
+            El socio <strong>{formData.nombre} {formData.apellido}</strong> ha sido registrado exitosamente.
+          </p>
+          <p className="text-sm text-gray-500 mt-4">
+            📧 Se ha creado un usuario con el correo: <strong>{formData.email}</strong>
+          </p>
+          <p className="text-sm text-gray-500">
+            🔑 Contraseña temporal: <strong>{formData.cedula}</strong>
+          </p>
+          <div className="mt-6">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="text-sm text-gray-500 mt-2">Redirigiendo...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -296,17 +335,28 @@ const NuevoSocio = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Ocupación
                 </label>
-                <input
-                  type="text"
-                  name="ocupacion"
-                  value={formData.ocupacion}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Ej: Ingeniero, Comerciante, etc."
-                  disabled={isLoading}
-                />
+                <div className="relative">
+                  <Briefcase className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="text"
+                    name="ocupacion"
+                    value={formData.ocupacion}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Ej: Ingeniero, Comerciante, etc."
+                    disabled={isLoading}
+                  />
+                </div>
               </div>
             </div>
+          </div>
+
+          {/* Nota informativa */}
+          <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <p className="text-sm text-blue-800">
+              <strong>Nota:</strong> Se creará automáticamente un usuario con el correo proporcionado. 
+              La contraseña temporal será la cédula del socio.
+            </p>
           </div>
 
           {/* Botones */}

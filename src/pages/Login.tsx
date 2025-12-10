@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogIn, AlertCircle, User, Lock, Eye, EyeOff } from 'lucide-react';
+import { login } from '../services/authService';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -77,43 +78,31 @@ const Login = () => {
       return;
     }
 
-    // Simular login
     try {
       setIsLoading(true);
 
-      // Simular delay de red
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Llamar al servicio de autenticación
+      const response = await login({ email, password });
 
-      // USUARIOS DE PRUEBA
-      if (email === 'admin@credicoop.com' && password === 'admin123') {
-        // Guardar en localStorage
-        localStorage.setItem('user', JSON.stringify({
-          email: 'admin@credicoop.com',
-          nombre: 'Carlos Administrador',
-          rol: 'ADMIN',
-          id: 'admin-1'
-        }));
-        
-        // Redirigir a dashboard admin
-        navigate('/admin/dashboard');
-      } 
-      else if (email === 'socio@credicoop.com' && password === 'socio123') {
-        localStorage.setItem('user', JSON.stringify({
-          email: 'socio@credicoop.com',
-          nombre: 'Juan Pérez',
-          rol: 'SOCIO',
-          id: 'socio-1'
-        }));
-        
-        
-        navigate('/socio/mis-prestamos');
-      } 
-      else {
-        throw new Error('Credenciales incorrectas');
+      if (!response.success) {
+        setGeneralError(response.error || 'Error al iniciar sesión');
+        return;
       }
+
+      // Redirigir según el rol
+      if (response.user?.rol === 'ADMIN') {
+        navigate('/admin/dashboard');
+      } else if (response.user?.rol === 'SOCIO') {
+        navigate('/socio/mis-prestamos');
+      } else {
+        setGeneralError('Rol de usuario no válido');
+      }
+
     } catch (error: any) {
+      console.error('Error en login:', error);
+      setGeneralError('Error de conexión. Intenta nuevamente.');
+    } finally {
       setIsLoading(false);
-      setGeneralError(error.message || 'Error al iniciar sesión');
     }
   };
 
