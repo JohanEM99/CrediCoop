@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calculator, Upload, FileText, CheckCircle, AlertCircle, DollarSign, Calendar, Percent, ArrowLeft } from 'lucide-react';
+import { Calculator, Upload, CheckCircle, AlertCircle, DollarSign, Calendar, Percent, ArrowLeft } from 'lucide-react';
 
 // Tipos de datos
 interface TipoPrestamo {

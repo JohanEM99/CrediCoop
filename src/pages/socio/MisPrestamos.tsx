@@ -21,7 +21,6 @@ interface Prestamo {
 const MisPrestamos = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
-  const [userId, setUserId] = useState('');
   const [vistaActual, setVistaActual] = useState<'activos' | 'solicitudes' | 'historial'>('activos');
   const [cargando, setCargando] = useState(true);
   
@@ -45,13 +44,12 @@ const MisPrestamos = () => {
     }
 
     setUserName(user.nombre);
-    setUserId(user.id);
 
     // Cargar datos del socio
-    cargarDatosSocio(user.id);
+    cargarDatosSocio();
   }, [navigate]);
 
-  const cargarDatosSocio = async (socioId: string) => {
+  const cargarDatosSocio = async () => {
     try {
       setCargando(true);
       
