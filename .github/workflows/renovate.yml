@@ -1,0 +1,41 @@
+#Nombre del workflow que aparecerá en GitHub Actions
+name: Renovate
+
+on:
+  schedule:
+    - cron: "0 3 1 * *" # Ejecutar solo 1 vez al mes
+  workflow_dispatch:       # Permite ejecutarlo manualmente
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+
+    steps:
+      #Descargar el contenido del repositorio dentro del runner
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      #Ejecutar Renovate para buscar dependencias actualizables
+      - name: Run Renovate
+        uses: renovatebot/github-action@v44.0.3 #Versión estable de la acción oficial de Renovate
+        with: 
+          renovate-version: full #Usa la versión completa del motor Renovate
+        env:
+          RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Mostrar estado de actualizaciones
+        run: |
+          echo "----------------------------------------"
+          echo "Revisando si hubo actualizaciones..."
+          echo "----------------------------------------"
+
+          #Busca en el archivo de logs si Renovate abrió una PR nueva
+          if grep -qi '"prOpened": true' renovate.log.json; then
+            echo "Renovate abrió nuevas Pull Requests con actualizaciones."
+          else
+            echo "No había actualizaciones disponibles para aplicar."
+          fi
+          
+          echo "----------------------------------------"
+          echo "Proceso completado."
+          echo "----------------------------------------"
